@@ -329,22 +329,27 @@ class TimelineThemeData with Diagnosticable {
         other.connectorTheme == connectorTheme;
   }
 
-  @override
-  int get hashCode {
-    // Warning: For the sanity of the reader, please make sure these properties
-    // are in the exact same order as in operator == and in the raw constructor
-    // and in the order of fields in the class and in the lerp() method.
-    final values = <Object>[
-      direction,
-      color,
-      nodePosition,
-      nodeItemOverlap,
-      indicatorPosition,
-      indicatorTheme,
-      connectorTheme,
-    ];
-    return hashList(values);
+  int hashList(Iterable<Object> values) {
+  int hash = 0;
+  for (var value in values) {
+    hash = (hash * 31) + (value.hashCode );
   }
+  return hash;
+}
+
+@override
+int get hashCode {
+  final values = <Object>[
+    direction,
+    color,
+    nodePosition,
+    nodeItemOverlap,
+    indicatorPosition,
+    indicatorTheme,
+    connectorTheme,
+  ];
+  return hashList(values);
+}
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
